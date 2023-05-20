@@ -1,7 +1,11 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 
-export function useFetch(url, queryParams = {}, method = "get", requestData = {}) {
+export default function useFetch(
+  url,
+  { queryParams = {}, method = "get", requestData = {} },
+  deps = []
+) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -13,16 +17,16 @@ export function useFetch(url, queryParams = {}, method = "get", requestData = {}
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios(
-         {
-            method,
-            url,
-            params: queryParams,
-            data: requestData
-         });
+        const response = await axios({
+          method,
+          url,
+          params: queryParams,
+          data: requestData,
+          mode: "no-cors",
+        });
         setData(response.data);
         setError(null);
-    
+
         if (cancelRequest.current) return;
       } catch (err) {
         if (cancelRequest.current) return;
@@ -39,7 +43,8 @@ export function useFetch(url, queryParams = {}, method = "get", requestData = {}
     return () => {
       cancelRequest.current = true;
     };
-  }, [url]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
 
   return { data, error, isLoading: loading };
 }
