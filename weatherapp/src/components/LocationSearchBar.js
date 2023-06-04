@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import LocationsLists from "./LocationsList";
 
-export default function LocationSearchBar() {
-  const [location, setLocation] = useState(null);
+export default function LocationSearchBar({ location, onLocationChange }) {
+  //const [location, setLocation] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
@@ -23,7 +23,7 @@ export default function LocationSearchBar() {
 
   const handleChangeSearchVal = (val) => {
     //reset location selected
-    setLocation(null);
+    onLocationChange(null);
 
     //update search value
     setSearchValue(val);
@@ -31,14 +31,14 @@ export default function LocationSearchBar() {
 
   const selectLocation = (locationData) => {
     //update location
-    setLocation(locationData);
+    onLocationChange(locationData);
     //empty suggestions
     setSuggestions([]);
   };
 
   return (
     <>
-      <div className="flex flex-col w-fill items-center ">
+      <div className="flex flex-col w-fill items-center">
         <input
           type="text"
           placeholder="Search…"
@@ -49,7 +49,7 @@ export default function LocationSearchBar() {
           onChange={(e) => handleChangeSearchVal(e.target.value)}
         />
 
-        <div className="w-3/4  ">
+        <div className="w-3/4">
           <LocationsLists
             options={suggestions}
             onSelectedLocation={selectLocation}
