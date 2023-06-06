@@ -9,7 +9,7 @@ export default function LocationSearchBar({ location, onLocationChange }) {
 
   //get options on location change
   const { data, error } = useFetch(
-    "v1/search",
+    "search",
     { queryParams: { name: searchValue }, count: 10, format: "json" },
     [searchValue]
   );
