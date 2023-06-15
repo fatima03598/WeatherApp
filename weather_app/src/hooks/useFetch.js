@@ -6,6 +6,9 @@ export default function useFetch(
   { queryParams = {}, method = "get", requestData = {} },
   deps = []
 ) {
+  console.log(queryParams);
+
+  //url = baseURL + url;
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);

@@ -7,20 +7,15 @@ export default defineConfig({
   server: {
     proxy: {
       "/search": {
-        target: "https://geocoding-api.open-meteo.com",
+        target: "https://geocoding-api.open-meteo.com/v1/search",
+        changeOrigin: true,
         secure: false,
-        rewrite: (path) => {
-          console.log(path);
-          return path + "/v1";
-        },
+        rewrite: (path) => path.replace(/^\/search/, ""),
       },
       "/forecast": {
-        target: "https://api.open-meteo.com",
-        rewrite: (path) => {
-          console.log(path);
-          return path + "/v1";
-        },
+        target: "https://api.open-meteo.com/v1/forecast",
         secure: false,
+        rewrite: (path) => path.replace(/^\/forecast/, ""),
       },
     },
   },

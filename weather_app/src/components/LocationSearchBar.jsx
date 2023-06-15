@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import LocationsLists from "./LocationsList";
+import PropTypes from 'prop-types';
 
 export default function LocationSearchBar({ location, onLocationChange }) {
-  //const [location, setLocation] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
   //get options on location change
-  const { data, error } = useFetch(
-    "search",
-    { queryParams: { name: searchValue }, count: 10, format: "json" },
+  const { data } = useFetch(
+    "/search",
+    { queryParams: { name: searchValue , count: 10, format: "json" }},
     [searchValue]
   );
 
@@ -57,4 +57,10 @@ export default function LocationSearchBar({ location, onLocationChange }) {
       </div>
     </>
   );
+}
+
+
+LocationSearchBar.propTypes = {
+  location: PropTypes.object,
+  onLocationChange: PropTypes.func,
 }
