@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import HourForecastList from "./HourForecastList";
+import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/prop-types
+
 export default function Forecast({ location = null }) {
   const hourlyForecastProps =
     "relativehumidity_2m,apparent_temperature,precipitation_probability,precipitation,snow_depth,weathercode,visibility,windspeed_10m,uv_index,uv_index_clear_sky,is_day";
@@ -19,6 +19,7 @@ export default function Forecast({ location = null }) {
         longitude: location?.longitude,
         hourly: hourlyForecastProps,
         daily: dailyForecastProps,
+        timezone: location?.timezone
       },
       count: 10,
       format: "json",
@@ -26,31 +27,19 @@ export default function Forecast({ location = null }) {
     [location]
   );
 
-  useEffect(() => {
-    if (data?.results) {
-      console.log(data);
-    }
-  }, [data]);
 
   if (!location) {
     return null;
   }
-  // const listItems = options.map((option) => (
-  //   <li
-  //     key={option.id}
-  //     onClick={() => onSelectedLocation(option)}
-  //   >
-  //     <button>
-  //       {option.name}, {option.country}
-  //     </button>
-  //   </li>
-  // ));
+
   return (
     <>
-      <HourForecastList />
+      <HourForecastList forecastData={data}/>
     </>
-    //   <ul className="menu menu-compact lg:menu-normal bg-base-100 w-full p-2 rounded-box">
-    //     {listItems}
-    //   </ul>
   );
+}
+
+
+Forecast.propTypes = {
+  location: PropTypes.object
 }

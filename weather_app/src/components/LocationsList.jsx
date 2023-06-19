@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function LocationsLists({ options, onSelectedLocation }) {
   if (options.length === 0) {
     return null;
@@ -18,4 +20,9 @@ export default function LocationsLists({ options, onSelectedLocation }) {
       {listItems}
     </ul>
   );
+}
+
+LocationsLists.propTypes = {
+  options: PropTypes.array,
+  onSelectedLocation: PropTypes.func
 }
