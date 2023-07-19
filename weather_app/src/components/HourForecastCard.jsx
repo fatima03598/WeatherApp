@@ -1,27 +1,22 @@
 import PropTypes from "prop-types";
-
+import YourSvg from "../assets/weather-icons/day.svg";
 export default function ForecastCard({ forecastData, hourIndex }) {
   console.log(forecastData);
-  console.log(hourIndex);
 
   return (
-    <div className="carousel-item">
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <figure>
-          <img
-            src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-            alt="Shoes"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <article className="hourForecast card h-full w-48 mx-1.5 bg-base-100 shadow-md">
+      <section className="h-1/5 flex justify-between">
+        <img src={YourSvg} alt="Your SVG" />
+        <p>Time</p>
+      </section>
+      <section
+        className=" h-2/5 flex justify-center"
+        style={{ transform: "scale(1.7)" }}
+      >
+        <img src={YourSvg} alt="Your SVG" />
+      </section>
+      <section className="h-2/5"></section>
+    </article>
   );
 }
 

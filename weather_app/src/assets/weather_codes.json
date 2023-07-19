@@ -1,0 +1,62 @@
+{
+  "[0]": {
+    "title": "Clear Sky",
+    "day": "day.svg",
+    "night": "night.svg"
+  },
+  "[1, 2, 3]": {
+    "title": "Partly cloudy",
+    "day": "day-partly-cloudy.svg",
+    "night": "night-partly-cloudy.svg"
+  },
+  "[45, 48]": {
+    "title": "Fog",
+    "day": "fog.svg",
+    "night": "fog.svg"
+  },
+  "[51, 53, 55]": {
+    "title": "Drizzle",
+    "day": "drizzle.svg",
+    "night": "drizzle.svg"
+  },
+  "[56, 57]": {
+    "title": "Freezing Drizzle",
+    "day": "drizzle.svg",
+    "night": "drizzle.svg"
+  },
+  "[61, 63, 65]": {
+    "title": "Rain",
+    "day": "rainy.svg",
+    "night": "rainy.svg"
+  },
+  "[66, 67]": {
+    "title": "Freezing Rain",
+    "day": "rainy.svg",
+    "night": "rainy.svg"
+  },
+  "[71, 73, 75]": {
+    "title": "Snow",
+    "day": "snowy.svg",
+    "night": "snowy.svg"
+  },
+  "[77]": {
+    "title": "Snow grains",
+    "day": "snow-grains.svg",
+    "night": "snow-grains.svg"
+  },
+  "[80, 81, 82]": {
+    "title": "Showers",
+    "day": "showers.svg",
+    "night": "showers.svg"
+  },
+  "[85, 86]": {
+    "title": "Snow Showers",
+    "day": "snow-showers.svg",
+    "night": "snow-showers.svg"
+  },
+  "[95, 96, 99]": {
+    "title": "Thunderstorm",
+    "day": "thunder.svg",
+    "night": "thunder.svg"
+  }
+}
