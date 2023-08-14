@@ -1,14 +1,17 @@
-import App from "../App";
+import LandingPage from "../pages/LandingPage";
 import WeatherPage from "../pages/WeatherPage";
 
 const routes = [
   {
     path: "/",
-    element: <App />,
-  },
-  {
-    path: "location/:latitude/:longitude/:timezone",
-    element: <WeatherPage />,
+    element: <LandingPage />,
+    //errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "location/:latitude/:longitude/:timezone",
+        element: <WeatherPage />,
+      },
+    ],
   },
 ];
 
