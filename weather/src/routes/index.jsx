@@ -8,7 +8,7 @@ const routes = [
     //errorElement: <ErrorPage />,
     children: [
       {
-        path: "location/:latitude/:longitude/:timezone",
+        path: "/:name",
         element: <WeatherPage />,
       },
     ],

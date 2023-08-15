@@ -1,22 +1,25 @@
 import PropTypes from "prop-types";
 import Forecast from "../components/Forecast";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function WeatherPage() {
-  function useQuery() {
-    const { search } = useLocation();
+  const { state } = useLocation();
+  const [location, setLocation] = useState(null);
 
-    return useMemo(() => new URLSearchParams(search), [search]);
-  }
+  useEffect(() => {
+    if (state && Object.keys(state).length > 0) {
+      const { latitude, longitude, timezone } = state;
 
-  let query = useQuery();
+      setLocation({
+        latitude,
+        longitude,
+        timezone,
+      });
+    }
+  }, [state]);
 
-  const location = {
-    latitude: query.get("latitude"),
-    longitude: query.get("longitude"),
-    timezone: query.get("timezone"),
-  };
+  if (!location) return null;
 
   return <Forecast location={location} />;
 }

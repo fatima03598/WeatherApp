@@ -5,12 +5,15 @@ import ExpandedForecast from "./ExpandedForecast";
 import useFetch from "../hooks/useFetch";
 
 export default function Forecast({ location }) {
+  console.log(location);
   const [focusedDay, setFocusedDay] = useState("");
+
+  const [dailyForecast, setDailyForecast] = useState(null);
 
   const dailyProperties =
     "weathercode,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max,precipitation_probability_max";
 
-  const { data: dailyForecast, error } = useFetch(
+  const { data, error } = useFetch(
     "forecast",
     {
       queryParams: {
@@ -19,11 +22,18 @@ export default function Forecast({ location }) {
         daily: dailyProperties,
         timezone: location?.timezone,
       },
-      count: 10,
-      format: "json",
     },
     [location]
   );
+
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+      setDailyForecast(data);
+    } else setDailyForecast(null);
+  }, [data]);
+
+  if (!location) return null;
 
   return (
     <>
