@@ -20,12 +20,13 @@ export default function LandingPage() {
   }, [location]);
 
   return (
-    <div
-      style={{ height: "65%" }}
-      className={"flex flex-col " + (location ? "" : "justify-center")}
-    >
-      <LocationSearchBar location={location} onLocationChange={setLocation} />
-      <Outlet />
+    <div className="w-full h-[85vh] p-5 flex flex-col">
+      <section className="flex-none w-full">
+        <LocationSearchBar location={location} onLocationChange={setLocation} />
+      </section>
+      <section className="flex-1 w-full">
+        <Outlet />
+      </section>
     </div>
   );
 }

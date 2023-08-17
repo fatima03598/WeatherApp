@@ -21,7 +21,11 @@ export default function WeatherPage() {
 
   if (!location) return null;
 
-  return <Forecast location={location} />;
+  return (
+    <div className="h-full flex justify-center p-3">
+      <Forecast location={location} />
+    </div>
+  );
 }
 
 WeatherPage.propTypes = {

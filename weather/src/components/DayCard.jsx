@@ -13,7 +13,7 @@ export default function DayCard({ dailyForecastData, dataUnits, listIndex }) {
 
   return (
     <>
-      <Paper elevation={1} />
+      <Paper elevation={2} className="h-full" />
     </>
   );
 }

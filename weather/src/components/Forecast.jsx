@@ -33,7 +33,7 @@ export default function Forecast({ location }) {
     } else setDailyForecast(null);
   }, [data]);
 
-  if (!location) return null;
+  if (!location || !dailyForecast) return null;
 
   return (
     <>

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import LocationsLists from "./LocationsList";
-import PropTypes from 'prop-types';
+import TextField from "@mui/material/TextField";
+import PropTypes from "prop-types";
 
 export default function LocationSearchBar({ location, onLocationChange }) {
   const [searchValue, setSearchValue] = useState("");
@@ -10,7 +11,7 @@ export default function LocationSearchBar({ location, onLocationChange }) {
   //get options on location change
   const { data } = useFetch(
     "/search",
-    { queryParams: { name: searchValue , count: 10, format: "json" }},
+    { queryParams: { name: searchValue, count: 10, format: "json" } },
     [searchValue]
   );
 
@@ -38,8 +39,9 @@ export default function LocationSearchBar({ location, onLocationChange }) {
   return (
     <>
       <div className="flex flex-col w-fill items-center">
-        <input
+        <TextField
           type="text"
+          variant="outlined"
           placeholder="Search…"
           className=" input input-secondary input-bordered w-3/4"
           value={
@@ -59,8 +61,7 @@ export default function LocationSearchBar({ location, onLocationChange }) {
   );
 }
 
-
 LocationSearchBar.propTypes = {
   location: PropTypes.object,
   onLocationChange: PropTypes.func,
-}
+};
