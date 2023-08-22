@@ -4,7 +4,7 @@ export default {
   theme: {
     minWidth: {
       56: "14rem",
-      40: "10rem",
+      64: "16rem",
     },
     extend: {},
   },

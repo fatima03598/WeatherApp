@@ -5,7 +5,6 @@ import ExpandedForecast from "./ExpandedForecast";
 import useFetch from "../hooks/useFetch";
 
 export default function Forecast({ location }) {
-  console.log(location);
   const [focusedDay, setFocusedDay] = useState("");
 
   const [dailyForecast, setDailyForecast] = useState(null);
@@ -28,7 +27,6 @@ export default function Forecast({ location }) {
 
   useEffect(() => {
     if (data) {
-      console.log(data);
       setDailyForecast(data);
     } else setDailyForecast(null);
   }, [data]);

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import IconButton from "@mui/material/IconButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +11,27 @@ import {
 export default function Carousel({ items = [] }) {
   const carousel = useRef(null);
   const scrollConstant = useRef(500);
+  const [rightEnd, setRightEnd] = useState(false);
+  const [leftEnd, setLeftEnd] = useState(false);
+
+  //function to update scroll end of an element when scrolling
+  const handleOnScroll = () => {
+    const elem = carousel.current;
+    if (parseInt(elem.scrollLeft) === 0) {
+      setLeftEnd(true);
+    } else setLeftEnd(false);
+
+    if (
+      parseInt(elem.scrollWidth - elem.clientWidth) ===
+      parseInt(elem.scrollLeft)
+    ) {
+      setRightEnd(true);
+    } else setRightEnd(false);
+  };
+
+  useEffect(() => {
+    handleOnScroll();
+  }, []);
 
   const handleScrollLeft = () => {
     if (carousel.current) {
@@ -33,6 +54,7 @@ export default function Carousel({ items = [] }) {
     <div style={{ position: "relative" }} className="h-full w-full">
       <IconButton
         aria-label="delete"
+        disabled={leftEnd}
         onClick={handleScrollLeft}
         style={{
           position: "absolute",
@@ -45,6 +67,7 @@ export default function Carousel({ items = [] }) {
       </IconButton>
       <IconButton
         aria-label="delete"
+        disabled={rightEnd}
         onClick={handleScrollRight}
         style={{
           position: "absolute",
@@ -56,7 +79,8 @@ export default function Carousel({ items = [] }) {
         <FontAwesomeIcon icon={faCircleChevronRight} size="lg" />
       </IconButton>
       <div
-        className="h-full w-full items-center"
+        className="h-full w-full items-center hide-scroll"
+        onScroll={handleOnScroll}
         ref={carousel}
         style={{
           overflowX: "scroll",
