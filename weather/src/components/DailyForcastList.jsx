@@ -7,7 +7,7 @@ export default function DailyForcastList({ dailyForecastData, onSelectDay }) {
     <article
       key={date}
       onClick={() => onSelectDay(date)}
-      className="min-w-64 w-72 h-60 mx-3"
+      className="min-w-64 w-72 h-60 mx-3 cursor-pointer"
     >
       <DayCard
         dailyForecastData={dailyForecastData.daily}

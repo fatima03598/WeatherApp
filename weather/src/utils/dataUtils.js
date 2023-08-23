@@ -9,7 +9,7 @@ import {
   faCloudBolt,
 } from "@fortawesome/free-solid-svg-icons";
 
-export const months = [
+const months = [
   "January",
   "February",
   "March",
@@ -24,6 +24,15 @@ export const months = [
   "December",
 ];
 
+const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 export const weatherIconMap = {
   0: faSun,
   1: faCloudSun,
@@ -53,4 +62,28 @@ export const weatherIconMap = {
   95: faCloudBolt,
   96: faCloudBolt,
   99: faCloudBolt,
+};
+
+export const getTime = (date) => {
+  let dateParsed = new Date(date);
+  let hour = dateParsed.getHours();
+
+  if (hour.toString().length == 1) {
+    hour = "0" + hour;
+  }
+
+  let minutes = dateParsed.getMinutes();
+  if (minutes.toString().length == 1) {
+    minutes = minutes + "0";
+  }
+  return `${hour}:${minutes}`;
+};
+
+export const getDate = (dateString) => {
+  const parsedDate = new Date(dateString);
+  const date = `${days[parsedDate.getDay()]} ${parsedDate.getDate()} ${
+    months[parsedDate.getMonth()]
+  }, ${parsedDate.getFullYear()}`;
+
+  return date;
 };

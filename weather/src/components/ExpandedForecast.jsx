@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import TabPanel from "@mui/lab/TabPanel";
 import { useState } from "react";
+import { getDate } from "../utils/dataUtils";
 import HourForecastList from "./HourlyForecastList";
 
 export default function ExpandedForecast({
@@ -12,24 +13,27 @@ export default function ExpandedForecast({
   onSelectDay,
   location,
 }) {
-  const [selectedTab, setTab] = useState("");
+  const [selectedTab, setTab] = useState("0");
   const handleChange = (event, newValue) => {
     setTab(newValue);
-    onSelectDay(getDate(newValue));
+    onSelectDay(getDateFromIndex(newValue));
   };
 
-  const getDate = (dateIndex) => {
-    return dailyForecastData.time[dateIndex];
+  const getDateFromIndex = (dateIndex) => {
+    return getDate(dailyForecastData.time[dateIndex]);
   };
 
   const tabList = dailyForecastData.time.map((date, dateIndex) => (
-    <Tab label={getDate(dateIndex)} value={dateIndex} key={date} />
+    <Tab
+      label={getDateFromIndex(dateIndex)}
+      value={`${dateIndex}`}
+      key={date}
+    />
   ));
 
   const tabContentList = dailyForecastData.time.map((date, dateIndex) => (
-    <TabPanel value={dateIndex} key={date}>
+    <TabPanel value={`${dateIndex}`} key={date}>
       <HourForecastList date={date} location={location} />
-      {date}
     </TabPanel>
   ));
 

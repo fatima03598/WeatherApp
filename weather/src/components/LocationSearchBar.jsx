@@ -3,6 +3,8 @@ import useFetch from "../hooks/useFetch";
 import LocationsLists from "./LocationsList";
 import TextField from "@mui/material/TextField";
 import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export default function LocationSearchBar({ location, onLocationChange }) {
   const [searchValue, setSearchValue] = useState("");
@@ -36,19 +38,33 @@ export default function LocationSearchBar({ location, onLocationChange }) {
     setSuggestions([]);
   };
 
+  const resetLocation = () => {
+    onLocationChange(null);
+    setSuggestions([]);
+  };
+
   return (
     <>
       <div className="flex flex-col w-fill items-center">
-        <TextField
-          type="text"
-          variant="outlined"
-          placeholder="Search…"
-          className=" input input-secondary input-bordered w-3/4"
-          value={
-            location ? `${location.name}, ${location.country}` : searchValue
-          }
-          onChange={(e) => handleChangeSearchVal(e.target.value)}
-        />
+        <div className="w-3/4 relative">
+          <TextField
+            type="text"
+            variant="outlined"
+            placeholder="Search…"
+            className=" input input-secondary input-bordered w-full"
+            value={
+              location ? `${location.name}, ${location.country}` : searchValue
+            }
+            onChange={(e) => handleChangeSearchVal(e.target.value)}
+          />
+          <FontAwesomeIcon
+            icon={faXmark}
+            size="lg"
+            style={{ color: "#c3c4d8" }}
+            onClick={resetLocation}
+            className="absolute right-2  top-1/4 cursor-pointer"
+          />
+        </div>
 
         <div className="w-3/4">
           <LocationsLists

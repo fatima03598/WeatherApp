@@ -12,7 +12,7 @@ export default function Forecast({ location }) {
   const dailyProperties =
     "weathercode,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max,precipitation_probability_max";
 
-  const { data, error } = useFetch(
+  const { data } = useFetch(
     "forecast",
     {
       queryParams: {

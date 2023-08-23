@@ -1,12 +1,15 @@
 import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
 import HourCard from "./HourCard";
 import useFetch from "../hooks/useFetch";
+import Carousel from "./Carousel";
 
 export default function HourForecastList({ location, date }) {
+  const [hourlyForecast, setHourlyForecast] = useState(null);
   const hourProps =
-    "apparent_temperature,precipitation_probability,snow_depth,weathercode,uv_index,is_day";
+    "apparent_temperature,precipitation_probability,weathercode,uv_index,is_day";
 
-  const { data: hourlyForecast, error } = useFetch(
+  const { data } = useFetch(
     "forecast",
     {
       queryParams: {
@@ -24,18 +27,26 @@ export default function HourForecastList({ location, date }) {
     [location]
   );
 
+  useEffect(() => {
+    if (data) {
+      setHourlyForecast(data);
+    } else setHourlyForecast(null);
+  }, [data]);
+
+  if (!location || !hourlyForecast) return null;
+
   const hourItems = hourlyForecast.hourly.time.map((hour, index) => (
-    <div key={hour}>
+    <article key={hour} className="min-w-52 w-72 h-60 mx-3">
       <HourCard
         hourlyForecastData={hourlyForecast.hourly}
         listIndex={index}
-        dataUnits={hourlyForecast.hourlyForecast}
+        dataUnits={hourlyForecast.hourly_units}
       />
-    </div>
+    </article>
   ));
   return (
-    <ul className="menu menu-compact lg:menu-normal bg-base-100 w-full p-2 rounded-box">
-      {hourItems}
+    <ul className="h-80 w-10/12  flex p-2 rounded-box">
+      <Carousel items={hourItems} />
     </ul>
   );
 }

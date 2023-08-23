@@ -1,32 +1,13 @@
 import PropTypes from "prop-types";
 import Paper from "@mui/material/Paper";
-import { months, weatherIconMap } from "../utils/dataUtils";
+import { weatherIconMap, getTime, getDate } from "../utils/dataUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTemperatureLow,
   faTemperatureHigh,
 } from "@fortawesome/free-solid-svg-icons";
 export default function DayCard({ dailyForecastData, dataUnits, listIndex }) {
-  const parsedDate = new Date(dailyForecastData.time[listIndex]);
-  const date = `${parsedDate.getDate()} ${
-    months[parsedDate.getMonth()]
-  }, ${parsedDate.getFullYear()}`;
-
-  const getTime = (date) => {
-    let dateParsed = new Date(date);
-    let hour = dateParsed.getHours();
-
-    if (hour.toString().length == 1) {
-      hour = "0" + hour;
-    }
-
-    let minutes = dateParsed.getMinutes();
-    if (minutes.toString().length == 1) {
-      minutes = minutes + "0";
-    }
-    return `${hour}:${minutes}`;
-  };
-
+  const date = getDate(dailyForecastData.time[listIndex]);
   const weatherCode = dailyForecastData.weathercode[listIndex];
   const maxTemp =
     dailyForecastData.apparent_temperature_max[listIndex] +
@@ -39,7 +20,7 @@ export default function DayCard({ dailyForecastData, dataUnits, listIndex }) {
   const uvIndexMax = dailyForecastData.uv_index_max[listIndex];
   const precProb =
     dailyForecastData.precipitation_probability_max[listIndex] +
-    dataUnits.precipitation_probability_max;
+    `${dataUnits.precipitation_probability_max}`;
 
   return (
     <>

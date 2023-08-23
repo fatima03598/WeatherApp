@@ -3,6 +3,7 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     minWidth: {
+      52: "13rem",
       56: "14rem",
       64: "16rem",
     },
